@@ -71,7 +71,7 @@ resp.results
 ### Get address information provided latitute and longitude
 
 ```ruby
-resp = GoogleGeocode::Client.new(api_key: "fake").find_address(latitude: -33.866489, longitude: 151.1958561)
+resp = GoogleGeocode::Client.new(api_key: "fake").find_lat_long(latitude: -33.866489, longitude: 151.1958561)
 ```
 Params:
 - `lat`: Float - Required - The latitude you want to get information for.
@@ -84,6 +84,16 @@ resp.results
 ```
 
 > Also `raw_response` is available if you want the raw response from the API. This is useful if you want to do something with the raw response. Also that response is in OpenStruct Object which is a nice wrapper for the raw response and you can use 'dot' notation.
+
+### Error Handling
+
+```ruby
+begin
+  client.find_lat_long(latitude: -33.866489, longitude: 151.1958561)
+rescue GoogleGeocode::Error => e
+  puts e.message
+end
+```
 
 ---
 
