@@ -1,8 +1,6 @@
 # GoogleGeocodeApi
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/google_geocode_api`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Google Geocode API is a light-weight Ruby wrapper for the Rubyists. It gives nice struct objects for adresses, even the raw responses are returned in nice open struct objects. It uses Faraday for HTTP requests.
 
 ## Installation
 
@@ -14,9 +12,80 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
     $ gem install google_geocode_api
 
+---
+
 ## Usage
 
-TODO: Write usage instructions here
+### API Documentation
+
+The API documentation can be found at [https://developers.google.com/maps/documentation/geocoding/start](https://developers.google.com/maps/documentation/geocoding/start).
+
+### Get an API key
+You can get API for the google by doing the following [here](https://developers.google.com/maps/documentation/geocoding/get-api-key#creating-api-keys).
+
+### Configuration
+
+```ruby
+require 'google_geocode_api'
+client = GoogleGeocodeApi::Client.new(api_key: ENV['GOOGLE_API_KEY'])
+```
+Params:
+- `api_key`: String - Required - The API key for the google geocode api.
+
+Response:
+```ruby
+#<GoogleGeocodeApi::Client:0x00000001055fc318 @adapter=:net_http, @api_key="YOUR_API_KEY", @stubs=nil>
+```
+
+### Get place information provided place id
+
+```ruby
+resp = GoogleGeocode::Client.new(api_key: "fake").find_place(place_id: "ChIJN1t_tDeuEmsRUsoyG83frY4")
+```
+Params:
+- `place_id`: String - Required - The place id for the place you want to get information for.
+
+Response:
+```ruby
+resp.results
+=> #<GoogleGeocodeApi::Response:0x0000000109ec58b0 @results=[#<GoogleGeocodeApi::Address:0x000000010a197d40 @formatted_address="48 Pirrama Rd, Pyrmont NSW 2009, Australia", @latitude=-33.866489, @location_type="ROOFTOP", @longitude=151.1958561, @place_id="ChIJN1t_tDeuEmsRUsoyG83frY4">]>
+```
+
+> Also `raw_response` is available if you want the raw response from the API. This is useful if you want to do something with the raw response. Also that response is in OpenStruct Object which is a nice wrapper for the raw response and you can use 'dot' notation.
+
+### Get address information provided address string
+
+```ruby
+resp = GoogleGeocode::Client.new(api_key: "fake").find_address(address: "48 Pirrama Rd, Pyrmont NSW 2009, Australia")
+```
+Params:
+- `address`: String - Required - The address you want to get information for.
+
+Response:
+```ruby
+resp.results
+=> #<GoogleGeocodeApi::Response:0x0000000109ec58b0 @results=[#<GoogleGeocodeApi::Address:0x000000010a197d40 @formatted_address="48 Pirrama Rd, Pyrmont NSW 2009, Australia", @latitude=-33.866489, @location_type="ROOFTOP", @longitude=151.1958561, @place_id="ChIJN1t_tDeuEmsRUsoyG83frY4">]>
+```
+> Also `raw_response` is available if you want the raw response from the API. This is useful if you want to do something with the raw response. Also that response is in OpenStruct Object which is a nice wrapper for the raw response and you can use 'dot' notation.
+
+### Get address information provided latitute and longitude
+
+```ruby
+resp = GoogleGeocode::Client.new(api_key: "fake").find_address(latitude: -33.866489, longitude: 151.1958561)
+```
+Params:
+- `lat`: Float - Required - The latitude you want to get information for.
+- `long`: Float - Required - The longitude you want to get information for.
+
+Response:
+```ruby
+resp.results
+=> #<GoogleGeocodeApi::Response:0x0000000109ec58b0 @results=[#<GoogleGeocodeApi::Address:0x000000010a197d40 @formatted_address="48 Pirrama Rd, Pyrmont NSW 2009, Australia", @latitude=-33.866489, @location_type="ROOFTOP", @longitude=151.1958561, @place_id="ChIJN1t_tDeuEmsRUsoyG83frY4">]>
+```
+
+> Also `raw_response` is available if you want the raw response from the API. This is useful if you want to do something with the raw response. Also that response is in OpenStruct Object which is a nice wrapper for the raw response and you can use 'dot' notation.
+
+---
 
 ## Development
 

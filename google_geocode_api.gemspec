@@ -2,14 +2,17 @@
 
 require_relative "lib/google_geocode_api/version"
 
+# rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
   spec.name = "google_geocode_api"
   spec.version = GoogleGeocodeApi::VERSION
   spec.authors = ["Sulman Baig"]
   spec.email = ["sulman@hey.com"]
 
-  spec.summary = "Google Geocode API is a lightweight Ruby wrapper for the Rubyists."
-  spec.description = "Google Geocode API is a lightweight Ruby wrapper for the Rubyists."
+  spec.summary = "Google Geocode API is a light-weight Ruby wrapper for the Rubyists."
+  spec.description = "Google Geocode API is a light-weight Ruby wrapper for the Rubyists. \
+  It gives nice struct objects for adresses, even the raw responses are returned in nice open struct objects. \
+  It uses Faraday for HTTP requests."
   spec.homepage = "https://github.com/sulmanweb/google_geocode_api"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6"
@@ -36,3 +39,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency("rubocop", "~> 1.35")
   spec.metadata["rubygems_mfa_required"] = "true"
 end
+# rubocop:enable Metrics/BlockLength
